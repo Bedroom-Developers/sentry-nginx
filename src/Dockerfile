@@ -110,6 +110,7 @@ RUN chmod +x -R /scripts && \
 # Make so that the parent's entrypoint script is properly triggered (issue #21).
     sed -ri '/^if \[ "\$1" = "nginx" \] \|\| \[ "\$1" = "nginx-debug" \]; then$/,${s//if echo "$1" | grep -q "nginx"; then/;b};$q1' /docker-entrypoint.sh
 
+COPY nginx.conf /etc/nginx/nginx.conf
 # Create a volume to have persistent storage for the obtained certificates.
 VOLUME /etc/letsencrypt
 
