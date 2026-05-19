@@ -47,8 +47,8 @@ jobs:
       - name: Build and Push amd64
         uses: docker/build-push-action@v6
         with:
-          context: .
-          file: Dockerfile
+          context: ./src
+          file: ./src/Dockerfile
           platforms: linux/amd64
           push: true
           tags: |
@@ -78,8 +78,8 @@ jobs:
       - name: Build and Push arm64
         uses: docker/build-push-action@v6
         with:
-          context: .
-          file: Dockerfile
+          context: ./src
+          file: ./src/Dockerfile
           platforms: linux/arm64
           push: true
           tags: |
