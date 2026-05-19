@@ -3,7 +3,7 @@ name: Sentry Nginx Build
 on:
   push:
     branches:
-      - live
+      - master
   workflow_dispatch:
 
 env:
