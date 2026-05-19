@@ -111,7 +111,3 @@ jobs:
           docker buildx imagetools create -t ${IMAGE_NAME}:${TAG} \
             ${IMAGE_NAME}:${TAG}-amd64 \
             ${IMAGE_NAME}:${TAG}-arm64
-
-          docker buildx imagetools create -t ${IMAGE_NAME}:${VERSION} \
-            ${IMAGE_NAME}:${VERSION}-amd64 \
-            ${IMAGE_NAME}:${VERSION}-arm64

@@ -1,19 +1,21 @@
 version: '3'
 
 services:
-  nginx:
-    image: jonasal/nginx-certbot:latest
-    restart: unless-stopped
-    environment:
-      - CERTBOT_EMAIL
-    env_file:
-      - ./nginx-certbot.env
+  proxy:
+    image: ghcr.io/bedroom-developers/sentry-nginx:latest
     ports:
-      - 80:80
-      - 443:443
-    volumes:                                    # Storage can be either a
-      - nginx_secrets:/etc/letsencrypt          # Docker managed volume (see list at the bottom)
-      - ./user_conf.d:/etc/nginx/user_conf.d    # or a host mount with a relative or full path.
+      - "80:80"
+      - "443:443"
+    environment:
+      CERTBOT_EMAIL: admin@ispark.kz
+      CERTBOT_AUTHENTICATOR: dns-cloudflare
+      STAGING: "0"
+      USE_ECDSA: "1"
+      RENEWAL_INTERVAL: 8d
+    volumes:
+      - ./nginx/cloudflare.ini:/etc/letsencrypt/cloudflare.ini:ro
+      - ./nginx/nginx.conf.d:/etc/nginx/user_conf.d:ro
+      - letsencrypt:/etc/letsencrypt
 
 volumes:
-  nginx_secrets:
+  letsencrypt:
